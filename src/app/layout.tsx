@@ -1,9 +1,10 @@
-import { NavigationMenuDemo } from "@/components/navigation-menu";
+import { SiteHeader } from "@/components/layouts/site-header";
+import { ThemeProvider } from "@/components/theme-provider";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const dmSans = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	title: "URL Shortener",
@@ -17,9 +18,16 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>
-				<NavigationMenuDemo />
-				{children}
+			<body className={dmSans.className}>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="system"
+					enableSystem
+					disableTransitionOnChange
+				>
+					<SiteHeader />
+					{children}
+				</ThemeProvider>
 			</body>
 		</html>
 	);

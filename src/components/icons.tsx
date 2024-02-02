@@ -35,6 +35,7 @@ import {
 	Menu,
 	MessageSquare,
 	Minus,
+	Moon,
 	MoreHorizontal,
 	MoreVertical,
 	Package,
@@ -47,6 +48,7 @@ import {
 	Sliders,
 	SlidersHorizontal,
 	Star,
+	Sun,
 	Trash,
 	UploadCloud,
 	User,
@@ -59,6 +61,8 @@ import {
 export type Icon = LucideIcon;
 
 export const Icons = {
+	moon: Moon,
+	sun: Sun,
 	mail: Mail,
 	linkedin: Linkedin,
 	star: Star,
