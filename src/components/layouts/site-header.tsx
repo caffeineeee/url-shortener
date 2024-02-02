@@ -6,7 +6,7 @@ import { ThemeToggle } from "./theme-toggle";
 export function SiteHeader() {
 	return (
 		<header className="sticky top-0 z-50 w-full border-b bg-background">
-			<div className="container flex h-16 items-center font-bold text-lg">
+			<div className="container flex h-16 items-center font-medium text-lg">
 				<span className="space-x-4">
 					<a href="/" className={cn("text-primary/60 hover:text-primary")}>
 						Home
