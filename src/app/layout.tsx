@@ -1,7 +1,9 @@
 import { SiteFooter } from "@/components/layouts/site-footer";
 import { SiteHeader } from "@/components/layouts/site-header";
+import SessionProvider from "@/components/session-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import type { Metadata } from "next";
+import { getServerSession } from "next-auth";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
 
@@ -12,24 +14,28 @@ export const metadata: Metadata = {
 	description: "Shorten your URL",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const session = await getServerSession();
+
 	return (
 		<html lang="en">
 			<body className={dmSans.className}>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="system"
-					enableSystem
-					disableTransitionOnChange
-				>
-					<SiteHeader />
-					{children}
-					<SiteFooter />
-				</ThemeProvider>
+				<SessionProvider session={session}>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="system"
+						enableSystem
+						disableTransitionOnChange
+					>
+						<SiteHeader />
+						{children}
+						<SiteFooter />
+					</ThemeProvider>
+				</SessionProvider>
 			</body>
 		</html>
 	);
