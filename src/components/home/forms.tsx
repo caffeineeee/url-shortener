@@ -15,29 +15,34 @@ export function Form() {
 		<ErrorBoundary fallback={<div>Something went wrong</div>}>
 			<form
 				style={{ opacity: !pending ? 1 : 0.7 }}
-				className="relative flex max-w-[500px] flex-col items-center"
+				className="flex flex-col space-y-8"
 				ref={formRef}
 				action={async (formData) => {
 					// await saveUrls(formData);
 					formRef.current?.reset();
 				}}
 			>
-				<input
-					aria-label="Your URL"
-					placeholder="https://..."
-					disabled={pending}
-					name="longUrl"
-					type="url"
-					required
-					className="block h-24 w-full rounded-md border-neutral-300 bg-gray-100 py-2 pl-4 pr-32 text-neutral-900 focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:text-neutral-100"
-				/>
+				<span className="space-y-2">
+					<p className="text-xl font-bold">Paste a long URL</p>
+					<input
+						aria-label="Your URL"
+						placeholder="Example: https://super-long-url.com/shorten-it-pls"
+						disabled={pending}
+						name="longUrl"
+						type="url"
+						required
+						className="block h-16 rounded-md border-neutral-300 bg-gray-100 py-2 pl-4 text-neutral-900 focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-800 dark:text-neutral-100 text-xl truncate xl:w-[66rem] lg:w-[52rem] md:w-[44rem] sm:w-[36rem] w-[85dvw]"
+					/>
+				</span>
 				<Button
-					className="absolute right-1 top-2 mr-1 flex justify-center rounded bg-neutral-200 px-2 py-1 font-medium text-neutral-900 dark:bg-neutral-700 dark:text-neutral-100"
+					className="flex rounded bg-neutral-200 px-6 py-6 font-medium text-neutral-900 dark:bg-blue-800 dark:text-neutral-100 place-self-start sm:w-fit w-[85dvw]"
 					disabled={pending}
 					type="submit"
+					variant="outline"
 				>
-					<div className="mr-3">Shorten URL</div>
-					<Icons.edit className="h-4 w-4" aria-hidden="true" />
+					<p className="text-lg text-center truncate">
+						Sign up and get your URL
+					</p>
 				</Button>
 			</form>
 		</ErrorBoundary>
