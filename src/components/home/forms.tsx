@@ -3,11 +3,12 @@
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { insertUrl } from "@/db/actions";
+import { type Session } from "next-auth";
 import { useRef } from "react";
 import { useFormStatus } from "react-dom";
 import { ErrorBoundary } from "react-error-boundary";
 
-export function Form() {
+export function Form({ session }: { session: Session }) {
 	const formRef = useRef<HTMLFormElement>(null);
 	const { pending } = useFormStatus();
 
@@ -36,11 +37,13 @@ export function Form() {
 				</span>
 				<Button
 					className="flex rounded bg-neutral-200 px-6 py-6 font-medium text-neutral-900 dark:bg-blue-800 dark:text-neutral-100 place-self-start sm:w-fit w-[85dvw]"
-					disabled={pending}
+					disabled={pending || !session?.user?.email}
 					type="submit"
 					variant="outline"
 				>
-					<p className="text-lg text-center truncate">Shorten URL</p>
+					<p className="text-lg text-center truncate">
+						{session?.user?.email ? "Shorten URL" : "Sign up and get your URL"}
+					</p>
 				</Button>
 			</form>
 		</ErrorBoundary>

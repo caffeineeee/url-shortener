@@ -20,9 +20,9 @@ async function FormSection() {
 	return (
 		<>
 			<div className="py-4">
+				<Form session={session} />
 				{session?.user ? (
 					<div>
-						<Form />
 						<SignOut />
 					</div>
 				) : (
