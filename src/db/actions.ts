@@ -1,4 +1,5 @@
 "use server";
+import "@/lib/server-only";
 
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { db } from "@/db";

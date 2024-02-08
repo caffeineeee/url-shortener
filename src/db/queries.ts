@@ -1,4 +1,5 @@
 "use server";
+import "@/lib/server-only";
 
 import { db } from "@/db";
 import { type Url, type User, urls, users } from "@/db/schema";
