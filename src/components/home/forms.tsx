@@ -2,7 +2,7 @@
 
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
-// import { saveUrls } from "@/db/actions";
+import { insertUrl } from "@/db/actions";
 import { useRef } from "react";
 import { useFormStatus } from "react-dom";
 import { ErrorBoundary } from "react-error-boundary";
@@ -18,7 +18,7 @@ export function Form() {
 				className="flex flex-col space-y-8"
 				ref={formRef}
 				action={async (formData) => {
-					// await saveUrls(formData);
+					await insertUrl(formData);
 					formRef.current?.reset();
 				}}
 			>

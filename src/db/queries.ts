@@ -1,9 +1,8 @@
 "use server";
 
 import { db } from "@/db";
-import { urls } from "@/db/schema/urls";
-import { users } from "@/db/schema/users";
-import { desc } from "drizzle-orm";
+import { type Url, type User, urls, users } from "@/db/schema";
+import { asc, desc } from "drizzle-orm";
 
 // export async function getUsersEntries() {
 // 	if (!process.env.DATABASE_URL) {
@@ -25,7 +24,7 @@ export async function getAllUsers() {
 	if (!process.env.DATABASE_URL) {
 		return [];
 	}
-	const allUsers = db
+	const result: User[] = await db
 		.select({
 			id: users.id,
 			email: users.email,
@@ -33,5 +32,22 @@ export async function getAllUsers() {
 		})
 		.from(users)
 		.orderBy(desc(users.createdAt));
-	return allUsers;
+	return result;
+}
+
+export async function getAllUrls() {
+	if (!process.env.DATABASE_URL) {
+		return [];
+	}
+	const result: Url[] = await db
+		.select({
+			id: urls.id,
+			longUrl: urls.longUrl,
+			shortUrl: urls.shortUrl,
+			createdBy: urls.createdBy,
+			createdAt: urls.createdAt,
+		})
+		.from(urls)
+		.orderBy(asc(urls.createdAt));
+	return result;
 }

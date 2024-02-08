@@ -13,12 +13,19 @@ export default function Home() {
 }
 
 async function FormSection() {
-	// const session = (await getServerSession()) as Session;
-
+	const session = (await getServerSession()) as Session;
 	return (
 		<>
 			<div className="py-4">
-				<Form />
+				{session?.user ? (
+					<div>
+						<Form />
+						<SignOut />
+					</div>
+				) : (
+					<SignIn />
+				)}
+				<p className="text-lg">Signed in as {session?.user?.email ?? ""}</p>
 			</div>
 		</>
 	);

@@ -1,7 +1,4 @@
-import { db } from "@/db";
-import { users } from "@/db/schema/users";
-import { createId } from "@paralleldrive/cuid2";
-import { sql } from "drizzle-orm";
+import { insertUser } from "@/db/actions";
 import { type NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 // import CredentialsProvider from "next-auth/providers/credentials";
@@ -51,17 +48,7 @@ export const authOptions: NextAuthOptions = {
 			if (!profile?.email) {
 				throw new Error("No profile");
 			}
-			const userId = createId();
-
-			// save user to DB
-			await db
-				.insert(users)
-				.values({
-					id: userId,
-					email: profile?.email,
-					createdAt: sql`CURRENT_TIMESTAMP`,
-				})
-				.onConflictDoNothing();
+			await insertUser(profile);
 			return true;
 		},
 	},
