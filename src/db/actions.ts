@@ -64,6 +64,7 @@ export async function insertUrl(formData: FormData) {
 		})
 		.onConflictDoNothing({ target: urls.shortUrl });
 
+	revalidatePath("/");
 	return insertedUrl;
 }
 

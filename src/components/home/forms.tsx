@@ -40,9 +40,7 @@ export function Form() {
 					type="submit"
 					variant="outline"
 				>
-					<p className="text-lg text-center truncate">
-						Sign up and get your URL
-					</p>
+					<p className="text-lg text-center truncate">Shorten URL</p>
 				</Button>
 			</form>
 		</ErrorBoundary>

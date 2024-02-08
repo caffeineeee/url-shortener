@@ -52,3 +52,15 @@ export async function getAllUrls() {
 		.orderBy(asc(urls.createdAt));
 	return result;
 }
+
+export async function getOneLatestUrl() {
+	if (!process.env.DATABASE_URL) {
+		return [];
+	}
+	const result: Url[] = await db
+		.select()
+		.from(urls)
+		.orderBy(desc(urls.createdAt))
+		.limit(1);
+	return result;
+}
