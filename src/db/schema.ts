@@ -14,7 +14,7 @@ export const urls = sqliteTable(
 	},
 	(table) => {
 		return {
-			nameIdx: index("short_url_idx").on(table.shortUrl),
+			shortUrlIdx: index("short_url_idx").on(table.shortUrl),
 		};
 	},
 );

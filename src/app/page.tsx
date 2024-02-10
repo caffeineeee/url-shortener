@@ -4,10 +4,17 @@ import { getOneLatestUrl } from "@/db/queries";
 import { type Session, getServerSession } from "next-auth";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+	const start = Date.now().toLocaleString();
+	const oneLatestUrl = await getOneLatestUrl();
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-between p-24">
 			<div className="flex flex-col items-center">
+				<div className="flex flex-col">
+					<p>from db: {oneLatestUrl?.createdAt}</p>
+					<p>start: {start}</p>
+				</div>
+
 				<FormSection />
 			</div>
 		</main>
@@ -35,10 +42,10 @@ async function FormSection() {
 					<span className="text-lg border-2 text-center">
 						Your shortened URL:{" "}
 						<Link
-							href={oneLatestUrl[0].shortUrl}
+							href={oneLatestUrl?.shortUrl ?? ""}
 							className="hover:underline hover:underline-offset-2"
 						>
-							{oneLatestUrl[0].shortUrl}
+							{oneLatestUrl?.shortUrl}
 						</Link>
 					</span>
 				</div>

@@ -51,7 +51,7 @@ export async function insertUrl(formData: FormData) {
 
 	const longUrl = formData.get("longUrl")?.toString() || "";
 	const longUrlBuffer = Buffer.from(longUrl);
-	const shortUrl = createShortUrl(longUrlBuffer); // ex: http://localhost:3000/aKc3K4b
+	const shortUrl = createShortUrl(longUrlBuffer);
 	const createdBy = session?.user?.email ?? "";
 
 	const insertedUrl = await db

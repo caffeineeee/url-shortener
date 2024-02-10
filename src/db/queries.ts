@@ -3,7 +3,7 @@ import "@/lib/server-only";
 
 import { db } from "@/db";
 import { type Url, type User, urls, users } from "@/db/schema";
-import { asc, desc } from "drizzle-orm";
+import { asc, desc, eq } from "drizzle-orm";
 
 // export async function getUsersEntries() {
 // 	if (!process.env.DATABASE_URL) {
@@ -41,26 +41,33 @@ export async function getAllUrls() {
 		return [];
 	}
 	const result: Url[] = await db
-		.select({
-			id: urls.id,
-			longUrl: urls.longUrl,
-			shortUrl: urls.shortUrl,
-			createdBy: urls.createdBy,
-			createdAt: urls.createdAt,
-		})
+		.select()
 		.from(urls)
 		.orderBy(asc(urls.createdAt));
 	return result;
 }
 
-export async function getOneLatestUrl() {
+export async function getOneLatestUrl(): Promise<Url | null> {
 	if (!process.env.DATABASE_URL) {
-		return [];
+		return null;
 	}
 	const result: Url[] = await db
 		.select()
 		.from(urls)
 		.orderBy(desc(urls.createdAt))
 		.limit(1);
-	return result;
+	const singleResult = result[0];
+	return singleResult;
+}
+
+export async function getMatchingUrl(url: string): Promise<Url | null> {
+	if (!process.env.DATABASE_URL) {
+		return null;
+	}
+	const result: Url[] = await db
+		.select()
+		.from(urls)
+		.where(eq(urls.shortUrl, url));
+	const singleResult = result[0];
+	return singleResult;
 }

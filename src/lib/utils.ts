@@ -26,7 +26,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_APP_URL;
 export function createShortUrl(longUrl: Buffer): string {
 	const shortenedId = encodeBase62(longUrl).slice(0, 7); // ex: "aKc3K4b"
 
-	console.log("shortenedId:", shortenedId);
+	console.log('shortenedId (ex: "aKc3K4b"):', shortenedId);
 
-	return `${BASE_URL}/${shortenedId}`; // ex: https://url.caffeineeee.me/aKc3K4b
+	return `${BASE_URL}/${shortenedId}`; // ex: http://localhost:3000/aKc3K4b
 }

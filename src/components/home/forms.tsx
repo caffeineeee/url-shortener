@@ -15,7 +15,7 @@ export function Form({ session }: { session: Session }) {
 	return (
 		<ErrorBoundary fallback={<div>Something went wrong</div>}>
 			<form
-				style={{ opacity: !pending ? 1 : 0.7 }}
+				style={{ opacity: !pending || session?.user?.email ? 1 : 0.7 }}
 				className="flex flex-col space-y-8"
 				ref={formRef}
 				action={async (formData) => {
@@ -28,7 +28,7 @@ export function Form({ session }: { session: Session }) {
 					<input
 						aria-label="Your URL"
 						placeholder="Example: https://super-long-url.com/shorten-it-pls"
-						disabled={pending}
+						disabled={pending || !session?.user?.email}
 						name="longUrl"
 						type="url"
 						required
