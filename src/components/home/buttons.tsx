@@ -2,7 +2,6 @@
 
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
-import { type Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
 
 export function SignIn() {
