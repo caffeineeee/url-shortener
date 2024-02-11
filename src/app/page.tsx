@@ -38,8 +38,6 @@ export default async function Home() {
 										{url.longUrl}
 									</Link>
 								</p>
-								<p>Created at: {url.createdAt}</p>
-								<p>Created by: {url.createdBy}</p>
 							</div>
 						);
 					})}
