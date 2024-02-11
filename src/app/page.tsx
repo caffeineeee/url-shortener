@@ -24,6 +24,7 @@ export default async function Home() {
 									Short URL:{" "}
 									<Link
 										href={url.shortUrl}
+										target="_blank"
 										className="underline hover:no-underline"
 									>
 										{url.shortUrl}
@@ -33,6 +34,7 @@ export default async function Home() {
 									Original URL:{" "}
 									<Link
 										href={url.longUrl}
+										target="_blank"
 										className="underline hover:no-underline"
 									>
 										{url.longUrl}
