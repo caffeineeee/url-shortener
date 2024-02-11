@@ -2,17 +2,21 @@
 
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
+import { type Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
 
 export function SignIn() {
 	return (
-		<div className="flex flex-col gap-2 p-8">
+		<div className="flex flex-col py-4">
 			<Button
-				className="inline-flex w-48 items-center rounded border border-neutral-200 bg-neutral-50 p-1 px-3 py-2 text-sm font-medium leading-4 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100"
+				className="flex rounded px-6 py-6 font-medium border border-neutral-200 bg-blue-700 hover:bg-blue-800 text-neutral-200 hover:text-neutral-200 place-self-start sm:w-fit w-[85dvw]"
 				onClick={() => signIn("google")}
+				variant="outline"
 			>
-				<Icons.google className="h-4 w-4" aria-hidden="true" />
-				<div className="ml-3">Sign in with Google</div>
+				<Icons.google className="h-4 w-4 mr-2" aria-hidden="true" />
+				<p className="text-base text-center truncate">
+					Sign in and get your URL
+				</p>
 			</Button>
 		</div>
 	);
@@ -20,14 +24,13 @@ export function SignIn() {
 
 export function SignOut() {
 	return (
-		<>
-			<Button
-				onClick={() => signOut()}
-				className="h-8 w-full border border-neutral-500 bg-neutral-200 text-neutral-900 dark:bg-neutral-700 dark:text-neutral-100"
-			>
-				<div className="text-neutral-700 dark:text-neutral-300">Sign out</div>
-				<Icons.logout className="ml-2 h-4 w-4" aria-hidden="true" />
-			</Button>
-		</>
+		<Button
+			onClick={() => signOut()}
+			variant="outline"
+			className="inline-flex w-32 items-center rounded text-sm font-medium leading-4 border border-neutral-500 bg-neutral-200 text-neutral-900"
+		>
+			<div className="text-neutral-700">Sign out?</div>
+			<Icons.logout className="ml-2 h-4 w-4" aria-hidden="true" />
+		</Button>
 	);
 }

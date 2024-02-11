@@ -36,7 +36,7 @@ export async function getAllUsers() {
 	return result;
 }
 
-export async function getAllUrls() {
+export async function getAllUrlsAsc() {
 	if (!process.env.DATABASE_URL) {
 		return [];
 	}
@@ -44,6 +44,17 @@ export async function getAllUrls() {
 		.select()
 		.from(urls)
 		.orderBy(asc(urls.createdAt));
+	return result;
+}
+
+export async function getAllUrlsDesc() {
+	if (!process.env.DATABASE_URL) {
+		return [];
+	}
+	const result: Url[] = await db
+		.select()
+		.from(urls)
+		.orderBy(desc(urls.createdAt));
 	return result;
 }
 

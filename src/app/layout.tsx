@@ -1,7 +1,4 @@
-import { SiteFooter } from "@/components/layouts/site-footer";
-import { SiteHeader } from "@/components/layouts/site-header";
 import SessionProvider from "@/components/session-provider";
-import { ThemeProvider } from "@/components/theme-provider";
 import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { DM_Sans } from "next/font/google";
@@ -24,18 +21,7 @@ export default async function RootLayout({
 	return (
 		<html lang="en">
 			<body className={dmSans.className}>
-				<SessionProvider session={session}>
-					<ThemeProvider
-						attribute="class"
-						defaultTheme="system"
-						enableSystem
-						disableTransitionOnChange
-					>
-						<SiteHeader />
-						{children}
-						<SiteFooter />
-					</ThemeProvider>
-				</SessionProvider>
+				<SessionProvider session={session}>{children}</SessionProvider>
 			</body>
 		</html>
 	);
