@@ -2,14 +2,16 @@ import { SignIn, SignOut } from "@/components/home/buttons";
 import { Form } from "@/components/home/forms";
 import { Icons } from "@/components/icons";
 import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
 import { getAllUrlsDesc, getOneLatestUrl } from "@/db/queries";
 import { type Session, getServerSession } from "next-auth";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default async function Home() {
 	const allUrls = await getAllUrlsDesc();
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between p-24">
+		<main className="flex min-h-screen flex-col items-center justify-between px-24 py-14">
 			<div className="flex flex-col items-center">
 				<FormSection />
 				<Separator className="mt-10 mb-2 py-0.5 bg-slate-700" />
@@ -17,32 +19,71 @@ export default async function Home() {
 					<h1 className="text-center text-xl my-2">
 						All ShortURLs that have been created
 					</h1>
-					{allUrls.map((url) => {
-						return (
-							<div key={url.id} className="pb-4 text-sm">
-								<p>
-									Short URL:{" "}
-									<Link
-										href={url.shortUrl}
-										target="_blank"
-										className="underline hover:no-underline"
-									>
-										{url.shortUrl}
-									</Link>
-								</p>
-								<p>
-									Original URL:{" "}
-									<Link
-										href={url.longUrl}
-										target="_blank"
-										className="underline hover:no-underline"
-									>
-										{url.longUrl}
-									</Link>
-								</p>
-							</div>
-						);
-					})}
+					<Suspense
+						fallback={
+							<>
+								<div className="flex flex-col space-x-4 *:bg-muted-foreground">
+									<Skeleton className="h-3 w-24" />
+									<Skeleton className="h-3 w-28" />
+								</div>
+								<div className="flex flex-col space-x-4 *:bg-muted-foreground">
+									<Skeleton className="h-3 w-24" />
+									<Skeleton className="h-3 w-28" />
+								</div>
+								<div className="flex flex-col space-x-4 *:bg-muted-foreground">
+									<Skeleton className="h-3 w-24" />
+									<Skeleton className="h-3 w-28" />
+								</div>
+								<div className="flex flex-col space-x-4 *:bg-muted-foreground">
+									<Skeleton className="h-3 w-24" />
+									<Skeleton className="h-3 w-28" />
+								</div>
+								<div className="flex flex-col space-x-4 *:bg-muted-foreground">
+									<Skeleton className="h-3 w-24" />
+									<Skeleton className="h-3 w-28" />
+								</div>
+								<div className="flex flex-col space-x-4 *:bg-muted-foreground">
+									<Skeleton className="h-3 w-24" />
+									<Skeleton className="h-3 w-28" />
+								</div>
+								<div className="flex flex-col space-x-4 *:bg-muted-foreground">
+									<Skeleton className="h-3 w-24" />
+									<Skeleton className="h-3 w-28" />
+								</div>
+								<div className="flex flex-col space-x-4 *:bg-muted-foreground">
+									<Skeleton className="h-3 w-24" />
+									<Skeleton className="h-3 w-28" />
+								</div>
+							</>
+						}
+					>
+						{allUrls.map((url) => {
+							return (
+								<div key={url.id} className="pb-4 text-sm">
+									<p>
+										Short URL:{" "}
+										<Link
+											href={url.shortUrl}
+											target="_blank"
+											className="underline hover:no-underline"
+										>
+											{url.shortUrl}
+										</Link>
+									</p>
+									<p>
+										Original URL:{" "}
+										<Link
+											href={url.longUrl}
+											target="_blank"
+											className="underline hover:no-underline"
+										>
+											{url.longUrl}
+										</Link>
+									</p>
+								</div>
+							);
+						})}
+					</Suspense>
 				</div>
 			</div>
 		</main>
