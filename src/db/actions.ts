@@ -71,13 +71,17 @@ export async function insertUrl(formData: FormData) {
 export async function insertUser(profile?: Profile) {
 	const userId = createId();
 
-	const insertedUser = await db
-		.insert(users)
-		.values({
-			id: userId,
-			email: profile?.email ?? "",
-		})
-		.onConflictDoNothing({ target: users.email });
+	try {
+		const insertedUser = await db
+			.insert(users)
+			.values({
+				id: userId,
+				email: profile?.email ?? "",
+			})
+			.onConflictDoNothing({ target: users.email });
 
-	return insertedUser;
+		return insertedUser;
+	} catch (error) {
+		console.error(error);
+	}
 }

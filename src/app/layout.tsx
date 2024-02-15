@@ -1,6 +1,7 @@
 import SessionProvider from "@/components/session-provider";
 import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
+import { Toaster } from 'sonner';
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
 
@@ -22,6 +23,7 @@ export default async function RootLayout({
 		<html lang="en">
 			<body className={dmSans.className}>
 				<SessionProvider session={session}>{children}</SessionProvider>
+			<Toaster richColors position="top-right" />
 			</body>
 		</html>
 	);
