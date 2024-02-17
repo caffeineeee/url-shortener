@@ -18,15 +18,6 @@ async function getSession(): Promise<Session> {
 	return session;
 }
 
-// export async function deleteUser(id: number) {
-// 	try {
-// 		await db.delete(users).where(eq(users.id, id));
-// 	} catch (error) {
-// 		console.error("Error in deleteUser: ", error);
-// 	}
-// 	revalidatePath("/users");
-// }
-
 export async function insertUrl(formData: FormData) {
 	const session = await getSession();
 
@@ -64,11 +55,11 @@ export async function insertUrl(formData: FormData) {
 				createdBy: createdBy,
 			})
 			.onConflictDoNothing({ target: urls.shortUrl });
+		revalidatePath("/");
 		return insertedUrl;
 	} catch (error) {
 		console.error(error);
 	}
-	revalidatePath("/");
 }
 
 export async function insertUser(profile?: Profile) {

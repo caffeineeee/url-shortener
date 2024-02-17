@@ -57,7 +57,7 @@ export default async function Home() {
 							</>
 						}
 					>
-						{allUrls.map((url) => {
+						{allUrls?.map((url) => {
 							return (
 								<div key={url.id} className="pb-4 text-sm">
 									<p>
