@@ -23,7 +23,7 @@ export async function getAllUsers(): Promise<User[] | null | undefined> {
 		revalidatePath("/");
 		return result;
 	} catch (error) {
-		console.error(error);
+		console.error("Error from getAllUsers: ", error);
 	}
 }
 
@@ -40,7 +40,7 @@ export async function getAllUrlsAsc(): Promise<Url[] | null | undefined> {
 		revalidatePath("/");
 		return result;
 	} catch (error) {
-		console.error(error);
+		console.error("Error from getAllUrlsAsc: ", error);
 	}
 }
 
@@ -57,7 +57,7 @@ export async function getAllUrlsDesc(): Promise<Url[] | null | undefined> {
 		revalidatePath("/");
 		return result;
 	} catch (error) {
-		console.error(error);
+		console.error("Error from getAllUrlsDesc: ", error);
 	}
 }
 
@@ -74,18 +74,26 @@ export async function getOneLatestUrl(): Promise<Url | null | undefined> {
 		const singleResult = result[0];
 		return singleResult;
 	} catch (error) {
-		console.error(error);
+		console.error("Error from getOneLatestUrl: ", error);
 	}
 }
 
-export async function getMatchingUrl(url: string): Promise<Url | null> {
+export async function getMatchingUrl(
+	url: string,
+): Promise<Url | null | undefined> {
 	if (!process.env.DATABASE_URL) {
 		return null;
 	}
-	const result: Url[] = await db
-		.select()
-		.from(urls)
-		.where(eq(urls.shortUrl, url));
-	const singleResult = result[0];
-	return singleResult;
+
+	try {
+		const result: Url[] = await db
+			.select()
+			.from(urls)
+			.where(eq(urls.shortUrl, url));
+		const singleResult = result[0];
+
+		return singleResult;
+	} catch (error) {
+		console.error("Error from getMatchingUrl: ", error);
+	}
 }

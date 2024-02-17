@@ -56,9 +56,10 @@ export async function insertUrl(formData: FormData) {
 			})
 			.onConflictDoNothing({ target: urls.shortUrl });
 		revalidatePath("/");
+
 		return insertedUrl;
 	} catch (error) {
-		console.error(error);
+		console.error("Error from insertUrl: ", error);
 	}
 }
 
@@ -76,6 +77,6 @@ export async function insertUser(profile?: Profile) {
 
 		return insertedUser;
 	} catch (error) {
-		console.error(error);
+		console.error("Error from insertUser: ", error);
 	}
 }
