@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "5bb59b35-edf7-4493-b102-867f454c3388",
+  "id": "a873cc88-f7d1-4dde-8d2e-79d036066509",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "urls": {
@@ -51,13 +51,6 @@
             "short_url"
           ],
           "isUnique": true
-        },
-        "short_url_idx": {
-          "name": "short_url_idx",
-          "columns": [
-            "short_url"
-          ],
-          "isUnique": false
         }
       },
       "foreignKeys": {

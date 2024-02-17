@@ -54,18 +54,21 @@ export async function insertUrl(formData: FormData) {
 	const shortUrl = createShortUrl(longUrlBuffer);
 	const createdBy = session?.user?.email ?? "";
 
-	const insertedUrl = await db
-		.insert(urls)
-		.values({
-			id: urlId,
-			longUrl: longUrl,
-			shortUrl: shortUrl,
-			createdBy: createdBy,
-		})
-		.onConflictDoNothing({ target: urls.shortUrl });
-
+	try {
+		const insertedUrl = await db
+			.insert(urls)
+			.values({
+				id: urlId,
+				longUrl: longUrl,
+				shortUrl: shortUrl,
+				createdBy: createdBy,
+			})
+			.onConflictDoNothing({ target: urls.shortUrl });
+		return insertedUrl;
+	} catch (error) {
+		console.error(error);
+	}
 	revalidatePath("/");
-	return insertedUrl;
 }
 
 export async function insertUser(profile?: Profile) {

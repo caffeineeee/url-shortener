@@ -14,5 +14,4 @@ CREATE TABLE `users` (
 );
 --> statement-breakpoint
 CREATE UNIQUE INDEX `urls_short_url_unique` ON `urls` (`short_url`);--> statement-breakpoint
-CREATE INDEX `short_url_idx` ON `urls` (`short_url`);--> statement-breakpoint
 CREATE UNIQUE INDEX `users_email_unique` ON `users` (`email`);
