@@ -4,8 +4,12 @@ const CHARSET =
 	"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
 export function encodeBase62(input: Buffer): string {
+	if (input.length === 0) return "";
+	
 	let result = "";
 	let combined = bufferToBigInt(input);
+
+	if (combined === BigInt("0")) return CHARSET[0];
 
 	while (combined > BigInt("0")) {
 		const index = Number(combined % BigInt("62"));

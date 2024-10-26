@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "jest --watch & next dev",
+    "build": "jest && next build",
     "start": "next start",
     "lint:next": "next lint",
     "format": "pnpm dlx @biomejs/biome format src --write",
@@ -15,7 +15,8 @@
     "db:push": "drizzle-kit push:sqlite",
     "db:studio": "drizzle-kit studio",
     "db:migrate": "drizzle-kit generate:sqlite",
-    "db:drop": "drizzle-kit drop"
+    "db:drop": "drizzle-kit drop",
+    "test": "jest"
   },
   "dependencies": {
     "@libsql/client": "^0.4.3",
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.5.3",
+    "@types/jest": "^29.5.14",
     "@types/node": "^20.11.17",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
@@ -44,8 +46,10 @@
     "drizzle-kit": "^0.20.14",
     "eslint": "^8.56.0",
     "eslint-config-next": "14.1.0",
+    "jest": "^29.7.0",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
+    "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }
